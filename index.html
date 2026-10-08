@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مفاجأة عيد ميلاد سموكة ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Great+Vibes&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -34,6 +34,7 @@
             position: relative;
         }
 
+        /* خلفية تقليب الصور */
         .bg-carousel {
             position: fixed;
             top: 0;
@@ -42,7 +43,6 @@
             height: 100%;
             z-index: 0;
             overflow: hidden;
-            transition: opacity 0.8s ease;
         }
 
         .bg-carousel-img {
@@ -54,9 +54,9 @@
             object-fit: cover;
             object-position: center;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out, filter 0.8s ease;
-            filter: brightness(0.4) blur(2px);
-            -webkit-filter: brightness(0.4) blur(2px);
+            transition: opacity 1.2s ease-in-out;
+            filter: brightness(0.35) blur(2px);
+            -webkit-filter: brightness(0.35) blur(2px);
             transform: scale(1.05);
         }
 
@@ -70,17 +70,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(35, 18, 56, 0.4) 0%, rgba(13, 7, 20, 0.85) 100%);
+            background: radial-gradient(circle at center, rgba(35, 18, 56, 0.3) 0%, rgba(13, 7, 20, 0.85) 100%);
             z-index: 1;
             pointer-events: none;
         }
 
-        /* إخفاء الصور الخلفية في الصفحة الأولى وصفحة كلمة السر */
-        body.no-bg .bg-carousel {
-            opacity: 0;
-        }
-
-        .stars-container {
+        /* النجوم والقلوب المتطايرة */
+        .stars-container, .hearts-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -100,6 +96,21 @@
         @keyframes twinkle {
             0%, 100% { opacity: 0.2; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: var(--accent-pink);
+            font-size: var(--size);
+            left: var(--left);
+            top: 100%;
+            opacity: 0.8;
+            animation: floatUp var(--duration) linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; }
         }
 
         .screen {
@@ -155,6 +166,17 @@
             text-shadow: 0 0 15px rgba(255, 101, 163, 0.5);
         }
 
+        /* خط اليد الإنجليزي السلس */
+        .sweet-handwriting {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            color: var(--text-gold);
+            text-shadow: 0 0 20px rgba(255, 230, 153, 0.8), 0 0 30px rgba(255, 101, 163, 0.6);
+            margin: 10px 0 18px 0;
+            line-height: 1.2;
+            direction: ltr;
+        }
+
         h2 {
             font-family: 'Reem Kufi', sans-serif;
             color: #ffffff;
@@ -163,9 +185,61 @@
             text-shadow: 0 0 15px rgba(255, 101, 163, 0.5);
         }
 
-        p {
-            font-size: 0.95rem;
-            line-height: 1.6;
+        .happy-birthday-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--text-gold);
+            text-shadow: 0 0 20px rgba(255, 230, 153, 0.8), 0 0 40px rgba(255, 101, 163, 0.6);
+            margin-bottom: 10px;
+            line-height: 1.2;
+            direction: ltr;
+        }
+
+        .subtitle-17 {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255, 101, 163, 0.8);
+        }
+
+        /* حاوية الصور المتطايرة */
+        .flying-photos-container {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            height: 250px;
+            margin: 15px 0;
+        }
+
+        .flying-photo {
+            position: absolute;
+            width: 110px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(255, 101, 163, 0.5);
+            animation: floatAround 4s ease-in-out infinite alternate;
+            transition: transform 0.4s ease, z-index 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .flying-photo:nth-child(1) { top: 10px; left: 10px; --rot: -8deg; transform: rotate(-8deg); animation-delay: 0s; }
+        .flying-photo:nth-child(2) { top: 10px; right: 10px; --rot: 8deg; transform: rotate(8deg); animation-delay: 0.8s; }
+        .flying-photo:nth-child(3) { bottom: 10px; left: 30px; --rot: 5deg; transform: rotate(5deg); animation-delay: 1.5s; }
+        .flying-photo:nth-child(4) { bottom: 10px; right: 30px; --rot: -6deg; transform: rotate(-6deg); animation-delay: 2.2s; }
+
+        .flying-photo:hover {
+            animation-play-state: paused;
+            transform: scale(1.6) rotate(0deg) !important;
+            z-index: 99;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 25px rgba(255, 101, 163, 0.9);
+        }
+
+        @keyframes floatAround {
+            0% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+            100% { transform: translateY(-15px) rotate(calc(var(--rot, 0deg) + 5deg)); }
         }
 
         .btn {
@@ -226,17 +300,6 @@
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
-        .custom-caption-text {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 101, 163, 0.8), 0 0 25px rgba(0, 0, 0, 0.9);
-            margin-bottom: 20px;
-            padding: 0 15px;
-            line-height: 1.5;
-        }
-
         .timeline {
             display: flex;
             flex-direction: column;
@@ -247,23 +310,35 @@
         }
 
         .timeline-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 15px;
-            border-radius: 15px;
+            background: rgba(22, 13, 33, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 16px 20px;
+            border-radius: 16px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .timeline-item h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
+            font-size: 1.15rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .timeline-date {
             color: var(--accent-pink);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .timeline-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .envelope-container {
@@ -316,14 +391,14 @@
         .hidden { display: none !important; }
     </style>
 </head>
-<body class="no-bg">
+<body>
 
-    <!-- ملف الأغنية (تشتغل بعد كلمة السر) -->
+    <!-- ملف الصوت -->
     <audio id="bgMusic" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- معرض الصور الخلفية -->
+    <!-- الخلفية المتحركة -->
     <div class="bg-carousel" id="bgCarousel">
         <img src="1.jpeg" class="bg-carousel-img active" alt="سموكة 1" onerror="this.onerror=null; this.src='1.jpg';">
         <img src="2.jpeg" class="bg-carousel-img" alt="سموكة 2" onerror="this.onerror=null; this.src='2.jpg';">
@@ -334,24 +409,25 @@
     <div class="bg-overlay"></div>
 
     <div class="stars-container" id="stars"></div>
+    <div class="hearts-container" id="hearts"></div>
 
     <!-- شاشة البداية -->
     <div class="screen active" id="screen-welcome">
         <div class="card">
             <div class="sub-title">هدية مغلفة بالذكريات 🎁</div>
-            <h1>مفاجأة خاصة جداً لـ سموكة ❤️</h1>
+            <div class="sweet-handwriting">Happy birthday, Smoka</div>
             <p>تم تحضير شيء جميل خصيصاً لأجلك.. هل أنتِ مستعدة؟</p>
             <button class="btn" onclick="nextScreen('screen-auth')">ابدأي المفاجأة ✨</button>
         </div>
     </div>
 
-    <!-- شاشة التحقق برقم السر -->
+    <!-- شاشة كلمة السر -->
     <div class="screen" id="screen-auth">
         <div class="card">
             <div class="sub-title">رمز الدخول السرّي 🔐</div>
             <h2>متى وُلدتِ يا حبّي؟</h2>
-            <p style="font-size: 0.85rem; color: #ccc;">أدخلي تاريخ اليوم السعيد (الكلمة السرية: 10/10)</p>
-            <input type="text" id="dateInput" class="date-input" placeholder="يوم / شهر (مثال: 10/10)">
+            <p style="font-size: 0.85rem; color: #ccc;">أدخلي تاريخ اليوم السعيد</p>
+            <input type="text" id="dateInput" class="date-input">
             <div class="error-msg" id="errorMsg">الرمز غير صحيح! جربي التاريخ السرّي الخاص بكِ.</div>
             <button class="btn" onclick="verifyDate()">متابعة 💕</button>
         </div>
@@ -363,43 +439,52 @@
         <div class="countdown-number" id="countdown">4</div>
     </div>
 
-    <!-- معرض الصور -->
+    <!-- شاشة المعرض مع القلوب والصور -->
     <div class="screen" id="screen-gallery">
-        <div class="custom-caption-text">
-            اضغط التالي حتى تبدأ المفاجأة لأجمل واحدة تتم 17 سنة ❤️
+        <div class="happy-birthday-title">Happy Birthday</div>
+        <div class="subtitle-17">لأجمل واحدة تتم 17 سنة ❤️✨</div>
+
+        <div class="flying-photos-container">
+            <img src="1.jpeg" class="flying-photo" alt="1" onerror="this.onerror=null; this.src='1.jpg';">
+            <img src="2.jpeg" class="flying-photo" alt="2" onerror="this.onerror=null; this.src='2.jpg';">
+            <img src="3.jpeg" class="flying-photo" alt="3" onerror="this.onerror=null; this.src='3.jpg';">
+            <img src="4.jpeg" class="flying-photo" alt="4" onerror="this.onerror=null; this.src='4.jpg';">
         </div>
 
-        <button class="btn" onclick="nextScreen('screen-story')">التالي ➡️</button>
+        <button class="btn" style="margin-top: 25px;" onclick="nextScreen('screen-story')">عرض الذكريات 📖</button>
     </div>
 
-    <!-- من يوم ميلادها حتى الآن (الجدول الزمني) -->
+    <!-- شاشة الذكريات -->
     <div class="screen" id="screen-story">
-        <h2>من يوم ميلادكِ حتى اليوم 🎂</h2>
-
+        <h2 style="font-size: 1.6rem; margin-bottom: 20px;">من يوم ميلادكِ حتى اليوم 🎂</h2>
+        
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-date">10/10/2009</div>
-                <h3>يوم ميلادكِ 👶</h3>
+                <h3>يوم ميلادك 👶</h3>
                 <p>اليوم الذي جئتِ فيه إلى الدنيا، وأشرقت فيه أروع ضحكة ونور في العالم.</p>
             </div>
+
             <div class="timeline-item">
-                <div class="timeline-date">سنواتكِ الأولى</div>
+                <div class="timeline-date">سنواتك الأولى</div>
                 <h3>الطفولة الجميلة 🧸</h3>
                 <p>أولى الضحكات، وأولى الخطوات، وأحلى الذكريات التي ما زالت في القلب.</p>
             </div>
+
             <div class="timeline-item">
                 <div class="timeline-date">وأنتِ تكبرين</div>
                 <h3>سنوات مرّت وكبرتِ فيها 🌸</h3>
                 <p>كل سنة كنتِ فيها أجمل وأذكى وأقرب إلى قلبي من التي قبلها.</p>
             </div>
+
             <div class="timeline-item">
                 <div class="timeline-date">10/10 — اليوم</div>
-                <h3>عيد ميلادكِ الـ 17 🎉</h3>
+                <h3>عيد ميلادك الـ 17 🎉</h3>
                 <p>نحتفل اليوم بأجمل وأحلى سموكة في العالم!</p>
             </div>
         </div>
 
-        <button class="btn" style="margin-top: 20px;" onclick="nextScreen('screen-letter')">اقرأي رسالتك ✉️</button>
+        <button class="btn" style="margin-top: 25px;" onclick="nextScreen('screen-letter')">اقرأي رسالتك ✉️</button>
     </div>
 
     <!-- الرسالة في الظرف -->
@@ -414,13 +499,13 @@
             <p style="margin-bottom: 8px;">كل عام وأنتِ بخير وسعادة وفرح.</p>
             <p style="margin-bottom: 8px;">أدعو الله أن يجعل أيامكِ كلها جميلة كجمال روحكِ ونعماً لا تنتهي. أنتِ لستِ مجرد أخت، بل صديقتي ورفيقة دربي وسندي في هذه الحياة.</p>
             <p style="margin-bottom: 8px;">في يوم ميلادكِ، أود أن أقول لكِ كم أنتِ مميزة بالنسبة لي وكم أعشق وجودكِ بجانبي. أدام الله هذا الوجه الجميل في حياتي، ومنحكِ السعادة والصحة والنجاح في كل خطوة.</p>
-            <p>أختي الغالية، دمتِ شيئاً جميلاً في حياتي لا ينتهي ولا يغيب. اللَّهُمَّ اجعلها سنة خير عليها وبداية أجمل لأقدارها وحقق لها كل ما يتمناه قلبها. ❤️</p>
+            <p>أختي الغالية، دمتِ شيئاً جميلاً في حياتي لا ينتهي ولا يغيب. اللَّهُمَّ اجعلها سنة خير عليها وبداية أجمل لأقدارها وحقق لها كل ما يتمناه قلبها. ❤️</p>
         </div>
 
         <button class="btn hidden" id="afterLetterBtn" onclick="nextScreen('screen-wish')">تمني أمنية 🎂</button>
     </div>
 
-    <!-- إطفاء الشموع والتمني -->
+    <!-- إطفاء الشموع -->
     <div class="screen" id="screen-wish">
         <div class="sub-title">تمني أمنية 🕯️</div>
         <h2>أغمضي عينيكِ واطفي الشمعة!</h2>
@@ -438,33 +523,31 @@
     <div class="screen" id="screen-gift">
         <div class="sub-title">الهدية الأخيرة 🎁</div>
         <h1>كل عام وأنتِ بقلبي يا سموكة ❤️</h1>
-
+        
         <div class="card" style="margin-top: 15px;">
             <p style="font-size: 1.05rem; line-height: 1.7;">
-                أتمنى لكِ عاماً رائعاً يشبه جمال قلبكِ، مليئاً بالحب، والضحك، وأن تتحقق فيه كل أحلامكِ.
+                أتمنى لكِ عاماً رائاً يشبه جمال قلبكِ، مليئاً بالحب، والضحك، وأن تتحقق فيه كل أحلامكِ.
             </p>
         </div>
 
-        <button class="btn" onclick="nextScreen('screen-gallery')">الرجوع لمعرض الصور 📸</button>
+        <button class="btn" onclick="nextScreen('screen-gallery')">الرجوع للمعرض 📸</button>
     </div>
 
     <script>
         const audio = document.getElementById('bgMusic');
-        let isPlaying = false;
         let imageInterval = null;
 
-        /* تشغيل الأغنية (بعد كلمة السر فقط) */
-        function playMusic() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    isPlaying = true;
-                }).catch(e => console.log("خطأ بالتشغيل:", e));
-            }
+        // دالة تشغيل الصوت المباشرة عند البدء بالعد
+        function playMusicNow() {
+            audio.currentTime = 0; // إعادة الأغنية من البداية
+            audio.play().catch(e => {
+                console.log("تعذر تشغيل الصوت تلقائياً:", e);
+            });
         }
 
-        /* إنشاء النجوم المتلألئة */
+        /* إنشاء النجوم والقلوب */
         const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 50; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             star.style.width = `${Math.random() * 3 + 1}px`;
@@ -475,13 +558,22 @@
             starsContainer.appendChild(star);
         }
 
+        const heartsContainer = document.getElementById('hearts');
+        const heartIcons = ['❤️', '💖', '💕', '✨', '🌸'];
+        for (let i = 0; i < 25; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            heart.style.setProperty('--left', `${Math.random() * 100}%`);
+            heart.style.setProperty('--size', `${Math.random() * 1.2 + 0.8}rem`);
+            heart.style.setProperty('--duration', `${Math.random() * 5 + 4}s`);
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            heartsContainer.appendChild(heart);
+        }
+
         function nextScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-
-            /* الصور الخلفية مخفية في الصفحة الأولى وصفحة كلمة السر فقط */
-            document.body.classList.toggle('no-bg', screenId === 'screen-welcome' || screenId === 'screen-auth');
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -489,7 +581,10 @@
             const val = document.getElementById('dateInput').value.trim();
             if (val === '10/10' || val === '10-10' || val === '10/10/2009' || val === '10/10/09') {
                 document.getElementById('errorMsg').style.display = 'none';
-                playMusic();
+                
+                // بدء تشغيل الأغنية فوراً مع الانتقال لشاشة العد التنازلي
+                playMusicNow();
+                
                 nextScreen('screen-countdown');
                 startCountdown();
             } else {
@@ -501,7 +596,7 @@
             let count = 4;
             const elem = document.getElementById('countdown');
             elem.textContent = count;
-
+            
             const timer = setInterval(() => {
                 count--;
                 if (count >= 1) {
@@ -510,11 +605,20 @@
                     clearInterval(timer);
                     nextScreen('screen-gallery');
                     startImageRotation();
+                    triggerConfetti();
                 }
             }, 1000);
         }
 
-        /* نظام التبديل التلقائي للصور */
+        function triggerConfetti() {
+            confetti({
+                particleCount: 80,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+        }
+
+        /* تقليب صور الخلفية */
         const bgImages = document.querySelectorAll('.bg-carousel-img');
         let currentImgIndex = 0;
 
@@ -541,8 +645,8 @@
             document.getElementById('giftBtn').classList.remove('hidden');
 
             confetti({
-                particleCount: 100,
-                spread: 70,
+                particleCount: 120,
+                spread: 90,
                 origin: { y: 0.6 }
             });
         }
